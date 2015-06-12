@@ -1,18 +1,21 @@
 package com.linksharing
 
+
+import com.DocumentResourceCommand
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+
 class DocumentResourceController {
 
-    def index() {}
-   /* def upload() {
-        def file = request.getFile('file')
-        if(file.empty) {
-            flash.message = "File cannot be empty"
-        } else {
-            def documentInstance = new DocumentResource()
-            documentInstance.filename = file.originalFilename
-            documentInstance.filedata = file.getBytes()
-            documentInstance.save()
-        }
-        redirect (action:'')
-    }*/
+    def shareDocumentResource(DocumentResourceCommand documentResourceCO){
+        User user=User.get(session['userId'])
+        DocumentResource documentResource = new DocumentResource(params)
+        documentResource.createdBy = user
+        documentResource.fileName=documentResourceCO.fileName
+        documentResource.description=documentResourceCO.description
+        //def CommonsMultipartFile uploadFile = params.documentFile    SpringSecurity Concept
+       // documentResource.contentType = uploadFile.contentType
+        documentResource.save(flush: true, failOnError: true)
+        documentResource.topic.addToResources(documentResource)
+        redirect(controller: 'dashboard', action: 'dashboard')
+    }
 }

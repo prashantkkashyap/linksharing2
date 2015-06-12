@@ -14,15 +14,12 @@ class Topic {
 
     static constraints = {
         name(unique: ('createdBy'))
-
            }
-    //GORM1 Q-3
-
      def afterInsert (){
         Subscription subscription=new Subscription()
         subscription.seriousness=Seriousness.SERIOUS
         createdBy.addToSubscriptions(subscription)
         this.addToSubscriptions(subscription)
-        subscription.save()
+        subscription.save(flash:true, failOnError: true)
     }
 }

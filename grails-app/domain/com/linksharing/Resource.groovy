@@ -3,7 +3,6 @@ package com.linksharing
 abstract  class Resource {
 
     String description
-    String title
     User createdBy
     Topic topic
     Date dateCreated
@@ -14,4 +13,7 @@ abstract  class Resource {
     static constraints = {
         description(maxSize: 1024)
             }
+    static mapping = {
+        tablePerHierarchy false
+    }
 }

@@ -1,13 +1,10 @@
 package com.linksharing
 
 class DashboardController {
-
-
     def dashboard() {
-        User user = User.get(session["userId"])
+        User user = User.get(session['userId'])
         long userSubscription = Subscription.countByUser(user)
         int userTopic = Topic.countByCreatedBy(user)
-
 
         List<Resource> unreadResources = new ArrayList<Resource>()
         Subscription.findAllByUser(user).each { subscription ->
@@ -21,10 +18,7 @@ class DashboardController {
         Subscription.findAllByUser(user).each {subscription ->
            totalSubscriptionUser.add(subscription.topic)
             }
-
-
-
-       /*totalSubscriptionUser.each{it->
+               /*totalSubscriptionUser.each{it->
         int totalPost=  Resource.countByTopic(it.topic)
        }*/
 
@@ -40,10 +34,11 @@ subscriptions.each{subscription->
 
         // Map userDetails = [user: user,userSubscription:userSubscription,userTopic:userTopic,unreadReources:unreadResources]
 
-        render(view: '/dashboard/dashboard', model: [user: user, userSubscription: userSubscription, userTopic: userTopic, unreadResources: unreadResources, totalSubscriptionUser: totalSubscriptionUser])
-        //render(view: '/dashboard/dashboard', model: [userDetails : userDetails])
+        render(view: '/dashboard/dashboard', model: [user: user, userSubscription: userSubscription, userTopic: userTopic,
+                                                     unreadResources: unreadResources, totalSubscriptionUser:
+                                                    totalSubscriptionUser])
     }
-    }
+}
 
 
 

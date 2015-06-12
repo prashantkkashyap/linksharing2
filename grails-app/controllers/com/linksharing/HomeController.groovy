@@ -14,12 +14,13 @@ class HomeController {
             topPost = topPost.sort{it.getAt(1) }
             topPost = topPost.reverse()
             topPost = topPost.subList(0, 5)
-            List<Resource> resources=new ArrayList<Resource>()
+            List<Resource>resources=new ArrayList<Resource>()
             topPost.each{resource->
                 resources.add(resource[0])
             }
-
-
             render(view:'/home/home', model: [topRecentShares: topRecentShares,topPost:resources])
     }
 }
+
+
+

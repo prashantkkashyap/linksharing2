@@ -97,12 +97,12 @@ class BootStrap {
                 LinkResource linkResource = new LinkResource()
                 String url = "http://www.grails.com/page${it}"
                 String description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry${topic}"
-                String title = "DummyLinkTitle${it + 1}"
+               // String title = "DummyLinkTitle${it + 1}"
 
                 linkResource.createdBy = topic.createdBy
                 linkResource.URL = url
                 linkResource.description = description
-                linkResource.title = title
+               // linkResource.title = title
                 topic.addToResources(linkResource)
                 linkResource.save(flush: true, failOnError: true)
 
@@ -112,22 +112,17 @@ class BootStrap {
                 String fileName = "ABCDDocument${it}"
                 String contentType = ".txt"
                 String dDescription = "dummyDocumentResource ${topic}"
-                String dTitle = "DummyDocumentTitle${it + 1}"
+              //  String dTitle = "DummyDocumentTitle${it + 1}"
 
                 documentResource.createdBy = topic.createdBy
                 documentResource.fileName = fileName
                 documentResource.contentType = contentType
                 documentResource.description = dDescription
-                documentResource.title = dTitle
+              //  documentResource.title = dTitle
                 topic.addToResources(documentResource)
                 documentResource.save(flush: true, failOnError: true)
-
-               /* ReadingItem readingItem=new ReadingItem()
-                readingItem.isRead=false
-                readingItem.save(flush: true, failOnError: true)*/
             }
         }
-
     }
 
     def createReadingItems() {
@@ -152,10 +147,7 @@ class BootStrap {
                 countOfReadingItems++
                 }
             }
-
-
         }
-
     }
 
     def createResourceRatings()
@@ -181,9 +173,7 @@ class BootStrap {
                 resource.addToResourceRatings(resourceRatings)
 
                 resourceRatings.save(flush: true,failOnError:true)
-
             }
-
         }
     def subscribeTopic(){
 

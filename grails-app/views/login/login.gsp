@@ -1,4 +1,4 @@
-<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>
+%{--<%@ taglib prefix="g" uri="http://grails.codehaus.org/tags" %>--}%
 <%--
   Created by IntelliJ IDEA.
   User: prashant
@@ -9,56 +9,57 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
-    <style type="text/css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    body {font-family: Helvetica,Arial; font-size:12px;}
-    #header{background-color:forestgreen; height:30px;width:auto;alignment:left;margin:0%;padding:2%;border:1px solid black;}
-    form label {display:inline-block ; width:100%;}
-    #login{margin:2%; padding:0%;width:25%;border:1px solid black;alignment:top;}
-   .inner-container{margin:2%; padding:2%;text-align:left;}
-    input[type="email"],input[type="password"]{width:160px;}
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="email"] {width:160px;}
-    form .line{padding:1%}
-    form .line.submit{tet-align:right;}
-    .header-heading{font-size:32px;margin:0%;padding:0%;}
-    .heading{font-size:16px;font-weight: bold;border: 1px solid #000000;background-color: forestgreen;width: auto;height:6%;}
-    .right {
-        float: right;
-        clear: both;
-    }
-    img{
-        float:left;
-        clear: both;
-        margin-right: 1%;
-        height:50px;
-        width:50px;
-    }
-    </style>
+    <title>Login</title>
+    <link rel="stylesheet" href=${resource(dir:'css',file: 'bootstrap.min.css')} >
+    <link  rel="stylesheet" href=${resource(dir: 'css',file: 'signin.css')} >
 </head>
 <body>
-<div>
-    <div id="header"><div class="header-heading">Link Sharing</div> <div class="right"><label for="search">Search &nbsp;&nbsp;</label><input type="search" id="search"/></div></div>
-        <div id="login">
-            <div class="heading">Login</div>
-                <div class="inner-container">
-                ${flash.message}
-                <g:if test="${session["user"]}">
-                    </br>
-                 Login as : ${session["user"]}  | <g:link action="logout">Logout</g:link>
-                </g:if>
-                <g:else>
-                    <g:form action="loginHandler">
-                    <div class="line"><lable for="email/username">Email/Username*:&nbsp;&nbsp;</lable><input type="email" id="email" name="email"/></div>
-                    <div class="line"><lable for="password">Password*:&nbsp;&nbsp;</lable><input type="password"  name="pwd"/></div>
-                    <div class="line"><lable for="login"></lable><input type="submit" value ='Login'/></div>
-                    <div><a href="/login/updateUserPassword.gsp" >Forgot password</a></div>
-                    </g:form>
-                </g:else>
+<nav class="nav navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">LinkSharing</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input class="form-control"  type="search" id="search" placeholder="Search"  />
+               </div>
+                </form>
             </div>
         </div>
+</nav>
+%{--<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">LinkSharing</div>
         </div>
+     </div>
+</div>--}%
+<div class="container">
+    ${flash.message}
+    <g:if test="${session['user']}">
+        </br>
+        Login as: ${session['user']} | <g:link action="logout">Logout</g:link>
+    </g:if>
+    <g:else>
+        <g:form controller="login" action="loginHandler" class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="email" class="sr-only">Email address</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label><input type="checkbox" value="remember-me"> Remember me</label> </br>
+            <label><g:link controller="login" action="updateUserPassword">Forgot password</g:link></label>
+            <label><g:link controller="home" action="home">Registration</g:link></label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </g:form>
+    </g:else>
+</div>
 </body>
 </html>

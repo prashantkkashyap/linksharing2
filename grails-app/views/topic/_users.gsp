@@ -1,13 +1,18 @@
-<div><img src="${resource(dir:'images', file: 'businessman.jpg')}"/></div>
-<div>
-    <ul>${totalSubscriptionUser.userName}</ul>
-    <div>@${totalSubscriptionUser.firstName}</div>
+<g:each in="${subscribedUsers}" var="user" >
+<div class="inner-container">
+    <div>
+    <img src="${resource(dir: 'images' , file: 'businessman.jpg')}" />
+    </div>
+    <ul>${user.firstName} ${user.lastName}</ul>
+    <div>@ ${user.userName}</div>
     <ul>
         <li>Subscriptions</li>
         <li>Topics</li>
     </ul>
     <ul>
-        <li>${totalSubscriptionUser.size()}</li>
-        <li>${userTopic}</li>
+        <li>${totalSubscribeUserTopic}</li>
+        <li>${totalUserTopic}</li>
     </ul>
+
 </div>
+</g:each>

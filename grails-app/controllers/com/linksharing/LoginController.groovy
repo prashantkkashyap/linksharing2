@@ -3,36 +3,34 @@ package com.linksharing
 class LoginController {
 
     // controller -1
-    def login()
-    {
+    def login() {
 
     }
 
-    def logout()
-    {
+    def logout() {
         session.invalidate()
-        redirect(controller:'login', action:'login')
+        redirect(controller: 'login', action: 'login')
     }
 // controller-3&4
 
     def loginHandler() {
         def userEmail = params.email
-        def userPwd = params.pwd
-
+        def userPwd = params.password
         User user = User.findByEmailAndPassword(userEmail, userPwd)
         if (!user) {
-            flash.message = "Login Failed"
-            redirect(controller: 'home', action: 'home')
+        flash.message = "Login Failed"
+         redirect(controller: 'home', action: 'home')
         } else {
-            flash.message = 'User Login successfully'
-            session['userId'] = user.id
-            redirect(controller: 'dashboard', action: 'dashboard')
+        flash.message = 'User Login successfully'
+        session['userId'] = user.id
+        redirect(controller: 'dashboard', action: 'dashboard')
         }
     }
     /*def editUserPassword(){
         [user:User.get(params.userId)]
 
     }*/
+
     def updateUserPassword() {
         def user = User.get(params.userId)
         user.password = params.newPassword
@@ -40,7 +38,7 @@ class LoginController {
             render view: 'updateUserPassword', model: [user: user]
         return
     }
-              /*if(params.email.equals("abcuser1@gmail.com") && params.pwd.equals('12345678')) {
+    /*if(params.email.equals("abcuser1@gmail.com") && params.pwd.equals('12345678')) {
             flash.message = "login succeed"
             session["user"] = params.email
             redirect(controller:'Home',action:'home')
@@ -49,20 +47,4 @@ class LoginController {
             redirect(action:'login')
         }*/
 
-    /*def register = {
-        // new user posts his registration details
-        if (request.method == 'POST') {
-
-            def u = new User(params)
-            u.passwordHashed = u.password.encodeAsPassword()
-            if (! u.save()) {
-                return [user:u]
-            } else {
-                session.user = u
-                redirect(controller:'login', action:'login')
-            }
-        } else if (session.user) {
-            redirect(controller:'login', action: 'login')
-        }
-    }*/
 }

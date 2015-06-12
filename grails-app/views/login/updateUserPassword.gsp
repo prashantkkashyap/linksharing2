@@ -45,9 +45,18 @@
         <div class="heading">Reset Password</div>
         <div class="inner-container">
                     <g:form action="updateUserPassword">
-                    <div class="line"><lable for="email/username">Email/Username*:&nbsp;&nbsp;</lable><input type="email" id="email" name="email"/></div>
-                    <div class="line"><lable for="password">Password*:&nbsp;&nbsp;</lable><input type="password"  name="pwd"/></div>
-                    <div class="line"><lable for="submit"></lable><input type="submit" value ='Submit'/></div>
+                    <div class="line">
+                        <lable for="email">Email*:&nbsp;&nbsp;</lable>
+                        <input type="email" id="inputEmail" name="inputEmail"/>
+                    </div>
+                    <div class="line">
+                        <lable for="password">Password*:&nbsp;&nbsp;</lable>
+                        <input type="password" id="inputPassword" name="inputPassword"/>
+                    </div>
+                    <div class="line">
+                        <lable for="submit"></lable>
+                        <input type="submit" value ='Submit'/>
+                    </div>
                     </g:form>
         </div>
     </div>
