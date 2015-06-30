@@ -14,7 +14,15 @@ class LinkResourceController {
         linkResource.description=linkResourceCO.description
         linkResource.save(flush: true , failOnError:true)
         linkResourceCO.topic.addToResources(linkResource)
+
+        ReadingItem readingItem = new ReadingItem()
+        readingItem.isRead = true
+        user.addToReadingItems(readingItem)
+        linkResource.addToReadingitems(readingItem)
+        println readingItem
+        linkResource.save(flush: true,failOnError: true)
+
+
         redirect(controller: 'dashboard',action: 'dashboard')
     }
-
 }

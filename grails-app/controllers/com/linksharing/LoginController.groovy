@@ -20,24 +20,21 @@ class LoginController {
         if (!user) {
         flash.message = "Login Failed"
          redirect(controller: 'home', action: 'home')
-        } else {
+        } else if (user.active==true){
         flash.message = 'User Login successfully'
         session['userId'] = user.id
         redirect(controller: 'dashboard', action: 'dashboard')
+        } else {
+            flash.message ='User is deactivated by Admin !! contact to administration !!'
+            render(view: '/template/alertTemplate' , model:[flash:flash.message])
         }
+
     }
     /*def editUserPassword(){
         [user:User.get(params.userId)]
 
     }*/
 
-    def updateUserPassword() {
-        def user = User.get(params.userId)
-        user.password = params.newPassword
-        if (!user.save())
-            render view: 'updateUserPassword', model: [user: user]
-        return
-    }
     /*if(params.email.equals("abcuser1@gmail.com") && params.pwd.equals('12345678')) {
             flash.message = "login succeed"
             session["user"] = params.email

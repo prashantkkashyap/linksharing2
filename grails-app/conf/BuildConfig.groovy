@@ -55,10 +55,7 @@ grails.project.dependency.resolution = {
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
        /* test "org.spockframework:spock-grails-support:0.7-groovy-2.0"*/
         test "org.codehaus.mojo:cobertura-maven-plugin:2.7"
-
-
     }
-
     plugins {
         // plugins for the build system only
         build ":tomcat:7.0.55"
@@ -68,8 +65,8 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
         compile ":mail:1.0.7"
+        compile ":quartz:1.0.2"
        // compile ":asynchronous-mail:1.2"
-       // compile ":quartz:1.0.2"
      //   compile ":kickstart-with-bootstrap:1.1.0"
 
         // plugins needed at runtime but not for compilation

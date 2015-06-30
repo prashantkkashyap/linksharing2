@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <title>Home</title>
     <link rel="stylesheet" href=${resource(dir:'css',file: 'bootstrap.min.css')} >
     <link  rel="stylesheet" href=${resource(dir: 'css',file: 'signin.css')} >
@@ -19,14 +20,14 @@
         float: right;clear: both;}
     #register{margin:2%; padding:0%;width:30%;border:1px solid black; float : right;
         clear: both;}
-    .inner-container{margin:0%; padding:0%;text-align:left;}
+    .inner-container{margin:2%; padding:0%;text-align:left;border: 1px solid #000000;}
     input[type="email"],input[type="password"]{width:160px;}
    form label {display:inline-block ; width:100%;}
     form input[type="text"],
     form input[type="password"],
     form input[type="email"] {width:160px;}
     form .line{padding:4% 0 0 2%}
-    .heading{font-size:16px;font-weight: bold;border: 1px solid #000000;background-color: forestgreen;width: auto;height:6%;}
+    .heading{font-size:16px;font-weight: bold;border: 1px solid #000000;background-color: #5cb85c;width: auto;height:6%;}
    #header{
        background-color:forestgreen;alignment: top; height:15%;width:auto;margin:0%;padding:0%;border:1px solid black;}
 
@@ -40,11 +41,9 @@
        width: 20%;
        padding: 0%;
    }
-    .right{
-        float:top;
-        clear: left;
-
-    }
+   .right {
+       float: right;
+   }
 
     img{
         float:left;
@@ -61,6 +60,11 @@
         display: inline-block;
         padding-left: 15px;
          }
+   .liStyle{
+       margin-left: 6%;}
+   .liStyle2{
+       margin-left: 15%;
+   }
  </style>
     
 </head>
@@ -124,66 +128,68 @@
                 </g:else>
             </div>
     </div>
+    <div id="register"  class="right">
+        <div class="heading">User Registration</div>
+        <div class="inner-container">
+            ${flash.message}
+            <g:hasErrors bean="${user}">
+                <div>
+                    <g:renderErrors bean="${user}"/>
+                </div>
+            </g:hasErrors>
+            <g:form controller="user" action="registerHandler" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="line">
+                        <label for="firstName">First Name: </label>
+                        <g:textField name="firstName" value="${user?.firstName}"
+                                     class="${hasErrors(bean:user,field:'firstName','errors')}" />
+                    </div>
+                    <div class="line">
+                        <label for="lastName">Last Name: </label>
+                        <g:textField name="lastName" value="${user?.lastName}"
+                                     class="${hasErrors(bean:user,field:'lastName','errors')}" />
+                    </div>
+                    <div class="line">
+                        <label for="email">Email*: </label>
+                        <g:textField name="email" value="${user?.email}"
+                                     class="${hasErrors(bean: user,field: 'email','errors')}"/>
+                    </div>
+                    <div class="line">
+                        <label for="userName"> Username*: </label>
+                        <input type="text" name="userName" id="${hasErrors(bean:user,field:'userName','errors')}" value="${user?.userName}"/>
+                    </div>
+                    <div class="line">
+                        <label for="password">Password*: </label>
+                        <g:passwordField name="password"
+                                         class="${hasErrors(bean:registerVlaidatorCO,field:'password','errors')}" />
+                    </div>
+                    <div class="line">
+                        <label for="confirm">Confirm Password*: </label>
+                        <g:passwordField name="confirm"
+                                         class="${hasErrors(bean:registerVlaidatorCO,field:'password','errors')}" />
+                    </div>
+                    <div class="line"><label for="image">Photo</label>
+                        <input type="file" id="image" name="image">
+                    </div>
+                    <div class="line">
+                        <g:submitButton name="submitButton" value="User Registration" />
+                    </div>
+                </fieldset>
+            </g:form>
+        </div>
+    </div>
         <div id="recent-shares">
             <div class="heading">Recent Shares</div>
-            <g:render template='recentShares' collection="${topRecentShares}" var="topRecentShare">
-            </g:render>
-        </div>
-        <div id="register"  class="right">
-            <div class="heading">User Registration</div>
-            <div class="inner-container">
-                ${flash.message}
-                <g:hasErrors bean="${user}">
-                    <div>
-                        <g:renderErrors bean="${user}"/>
-                    </div>
-                </g:hasErrors>
-                <g:form controller="user" action="registerHandler">
-                    <fieldset>
-                        <div class="line">
-                            <label for="firstName">First Name: </label>
-                            <g:textField name="firstName" value="${user?.firstName}"
-                                         class="${hasErrors(bean:user,field:'firstName','errors')}" />
-                        </div>
-                        <div class="line">
-                            <label for="lastName">Last Name: </label>
-                            <g:textField name="lastName" value="${user?.lastName}"
-                                         class="${hasErrors(bean:user,field:'lastName','errors')}" />
-                        </div>
-                        <div class="line">
-                            <label for="email">Email*: </label>
-                            <g:textField name="email" value="${user?.email}"
-                                        class="${hasErrors(bean: user,field: 'email','errors')}"/>
-                        </div>
-                        <div class="line">
-                            <label for="userName"> Username*: </label>
-                            <input type="text" name="userName" id="${hasErrors(bean:user,field:'userName','errors')}" value="${user?.userName}"/>
-                        </div>
-                        <div class="line">
-                            <label for="password">Password*: </label>
-                            <g:passwordField name="password"
-                                             class="${hasErrors(bean:registerVlaidatorCO,field:'password','errors')}" />
-                        </div>
-                        <div class="line">
-                            <label for="confirm">Confirm Password*: </label>
-                            <g:passwordField name="confirm"
-                                             class="${hasErrors(bean:registerVlaidatorCO,field:'password','errors')}" />
-                        </div>
-                        <div class="line"><label for="image">Photo</label>
-                            <input type="file" id="image">
-                        </div>
-                        <div class="line">
-                            <g:submitButton name="submitButton" value="User Registration" />
-                        </div>
-                    </fieldset>
-                </g:form>
-            </div>
+            <g:render template='recentShares' model="${topRecentPublicPostsCount}"/>
+
+            %{--<g:render template='recentShares' collection="${topRecentShares}" var="topRecentShare">
+            </g:render>--}%
         </div>
         <div id="top-posts">
             <div class="heading">
                <span>Top Posts</span>
-                <select class="right">
-                    <option value="">Today</option>
+                <select style="alignment:right;">
+                    <option value="Today">Today</option>
                     <option value="week" >Week</option>
                     <option value="Month">Month</option>
                     <option value="Year">Year</option>

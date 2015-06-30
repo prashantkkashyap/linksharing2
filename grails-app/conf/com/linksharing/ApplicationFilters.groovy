@@ -3,11 +3,10 @@ package com.linksharing
 class ApplicationFilters {
 
     def filters = {
-      // all(controller:'DummyController', action:'index') {
-        some(uri:"/DummyController") {
+      log(controller:'*', action:'*') {
+      //  some(uri:"/DummyController") {
         before = {
-            println("..........before filter.........")
-
+            log.debug " request parameters: $params"
             }
             after = { Map model ->
 

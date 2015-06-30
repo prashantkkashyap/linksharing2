@@ -12,12 +12,12 @@ class BootStrap {
 
     def init = { servletContext ->
 
-        createUser()
-        createTopic()
+       // createUser()
+       /* createTopic()
         createResources()
         createReadingItems()
         createResourceRatings()
-        subscribeTopic()
+        subscribeTopic()*/
     }
    /*List <User>createUser(){
        List<User> users =new ArrayList<User>()
@@ -50,18 +50,18 @@ class BootStrap {
          }*/
 
 
-    def createUser() {
+   /* def createUser() {
 
         User user1 = new User(firstName: "user1", lastName: "Kashyap", email: "abcuser1@gmail.com", userName: "user1", password: "12345678", photo: [1, 2, 3, 4, 5], admin: true, active: true)
-        User user2 = new User(firstName: "user2", lastName: "Kashyap", email: "abcuser2@gmail.com", userName: "user2", password: "12345678", photo: [1, 2, 3, 4, 5], admin: true, active: true)
+        User user2 = new User(firstName: "user2", lastName: "Kashyap", email: "abcuser2@gmail.com", userName: "user2", password: "12345678", photo: [1, 2, 3, 4, 5], admin: false, active: true)
         user1.save(flush: true, failOnError: true)?: println("...........Error in Saving......................................")
         user2.save(flush: true, failOnError: true)?: println("...........Error in Saving.......................................")
 
 
         println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $User.count")
-    }
+    }*/
 
-    def createTopic() {
+   /* def createTopic() {
         Topic user1t1 = new Topic(name: "java1", visibility: Visibility.PRIVATE)
         Topic user1t2 = new Topic(name: "java2", visibility: Visibility.PUBLIC)
         Topic user1t3 = new Topic(name: "java3", visibility: Visibility.PUBLIC)
@@ -179,7 +179,7 @@ class BootStrap {
 
 
     }
-
+*/
     def destroy = {
     }
 }

@@ -7,7 +7,7 @@
                     <h4><span class="glyphicon glyphicon-envelope"></span>Send Invitations</h4>
                 </div>
                 <div class="modal-body">
-                    <g:form >
+                    <g:form  >
                         <div class="form-group">
                             <lable for="email"><span class="glyphicon glyphicon-envelope"></span>Email* : </lable>
                             <input type="email" class="form-control" value="${user?.email}" id="email" placeholder="Enter Email"/>

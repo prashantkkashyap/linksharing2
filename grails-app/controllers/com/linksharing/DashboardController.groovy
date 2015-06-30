@@ -1,6 +1,7 @@
 package com.linksharing
 
 class DashboardController {
+    def readingItemService
     def dashboard() {
         User user = User.get(session['userId'])
         long userSubscription = Subscription.countByUser(user)
@@ -10,33 +11,42 @@ class DashboardController {
         Subscription.findAllByUser(user).each { subscription ->
             Resource.findAllByTopic(subscription.topic).each { resource ->
                 ReadingItem readingItem=ReadingItem.findByUserAndResource(user,resource)
-                if(!readingItem || !readingItem.isRead)
+                if(!readingItem || readingItem.isRead == false  || !readingItem.isRead)
                 unreadResources.add(resource)
             }
         }
-        List<Subscription> totalSubscriptionUser = new ArrayList<Subscription>()
+        //unreadResources = unreadResources.sort {it -> it.dateCreated}
+//        unreadResources = unreadResources.reverse()
+
+        List subscriptionUserTopicList = new ArrayList<Subscription>()
         Subscription.findAllByUser(user).each {subscription ->
-           totalSubscriptionUser.add(subscription.topic)
+            subscriptionUserTopicList.add(subscription.topic)
             }
-               /*totalSubscriptionUser.each{it->
-        int totalPost=  Resource.countByTopic(it.topic)
-       }*/
 
-        /*List<Subscription> totalSubscriptionUser = new ArrayList<Subscription>()
-def subscriptions=Subscription.withCriteria{
-            eq('user',user)
 
-        }
-subscriptions.each{subscription->
+        def topicCreatedByUser= user.topics.id
+        topicCreatedByUser.sort ()
+       // println(topicCreatedByUser)
 
-	totalSubscriptionUser.add(subscription.topic)
-}*/
+       /* List topicCreatedByUser =[]
+        Topic.findAllByCreatedBy(user).each{topic ->
+            topicCreatedByUser.add(topic)
+        }*/
+
 
         // Map userDetails = [user: user,userSubscription:userSubscription,userTopic:userTopic,unreadReources:unreadResources]
 
-        render(view: '/dashboard/dashboard', model: [user: user, userSubscription: userSubscription, userTopic: userTopic,
-                                                     unreadResources: unreadResources, totalSubscriptionUser:
-                                                    totalSubscriptionUser])
+        render(view: '/dashboard/dashboard' , model: [user: user, userSubscription: userSubscription, userTopic: userTopic,
+                                                     unreadResources: unreadResources, subscriptionUserTopicList:
+                subscriptionUserTopicList,topicCreatedByUser:topicCreatedByUser])
+    }
+    def readingItem(){
+
+        User user=User.get(session['userId'])
+        params
+        readingItemService.readingItemMethod(user, params)
+        redirect(controller: 'dashboard', action: 'dashboard')
+
     }
 }
 

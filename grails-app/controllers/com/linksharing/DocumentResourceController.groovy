@@ -16,6 +16,14 @@ class DocumentResourceController {
        // documentResource.contentType = uploadFile.contentType
         documentResource.save(flush: true, failOnError: true)
         documentResource.topic.addToResources(documentResource)
+
+        ReadingItem readingItem = new ReadingItem()
+        readingItem.isRead = true
+        user.addToReadingItems(readingItem)
+        documentResource.addToReadingitems(readingItem)
+      //  println readingItem
+        documentResource.save(flush: true,failOnError: true)
+
         redirect(controller: 'dashboard', action: 'dashboard')
     }
 }
